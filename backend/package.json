@@ -1,15 +1,16 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "description": "Backend service for password manager application",
+  "main": "index.js",
   "scripts": {
     "start": "node src/index.js"
   },
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.10.9",
-    "jsonwebtoken": "^8.5.1",
-    "bcryptjs": "^2.4.3"
+    "mongoose": "^6.2.1",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0"
   }
 }
 

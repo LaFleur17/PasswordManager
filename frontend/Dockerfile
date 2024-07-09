@@ -1,30 +1,31 @@
-# frontend/Dockerfile
+# Utiliser une image Node.js pour le build du frontend
+FROM node:14 as build
 
-# Utiliser une image Node.js officielle comme image de base
-FROM node:14
+# Définir le répertoire de travail pour le build
+WORKDIR /app/frontend
 
-# Définir le répertoire de travail dans le conteneur
-WORKDIR /app
+# Copier les fichiers nécessaires
+COPY package.json ./
+COPY package-lock.json ./
 
-# Copier les fichiers package.json et package-lock.json
-COPY package*.json ./
-
-# Installer les dépendances du projet
+# Installer les dépendances
 RUN npm install
 
-# Copier tout le code source dans le répertoire de travail du conteneur
-COPY . .
+# Copier le reste des fichiers de l'application frontend
+COPY  . .
 
-# Construire l'application React pour la production
+# Build de l'application React
 RUN npm run build
 
-# Utiliser une image nginx pour servir l'application React
-FROM nginx:alpine
-COPY --from=build-stage /app/build /usr/share/nginx/html
+# Étape finale, utiliser Nginx pour servir l'application construite
+FROM nginx:1.21
 
-# Exposer le port sur lequel nginx écoute
+# Copier les fichiers buildés depuis le stage de build vers Nginx
+COPY --from=build /app/frontend/build /usr/share/nginx/html
+
+# Exposer le port HTTP par défaut de Nginx
 EXPOSE 80
 
-# Commande pour démarrer nginx
+# Commande par défaut pour démarrer Nginx
 CMD ["nginx", "-g", "daemon off;"]
 
