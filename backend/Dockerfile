@@ -9,10 +9,10 @@ COPY package.json ./
 COPY package-lock.json ./
 
 # Installer les dépendances
-RUN npm install --production
+RUN npm install 
 
 # Copier le reste des fichiers de l'application backend
-COPY . .
+COPY backend .
 
 # Exposer le port sur lequel le serveur backend écoute
 EXPOSE 5000
