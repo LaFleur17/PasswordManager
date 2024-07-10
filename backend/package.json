@@ -4,7 +4,7 @@
   "description": "Backend service for password manager application",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "dev": "nodemon -L src/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -13,6 +13,10 @@
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^6.2.1"
+    "mongoose": "^6.2.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }

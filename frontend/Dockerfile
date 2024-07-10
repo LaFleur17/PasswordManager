@@ -5,21 +5,20 @@ FROM node:14 as build
 WORKDIR /app/frontend
 
 # Copier les fichiers nécessaires
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json package-lock.json /app/frontend
 
 # Installer les dépendances
-RUN npm install
+RUN npm install 
 
 # Copier le reste des fichiers de l'application frontend
-COPY  frontend .
+COPY . /app/frontend
 
 # Build de l'application React
-RUN npm run build
+#RUN npm run build
 
 # Exposer le port HTTP par défaut de Nginx
-EXPOSE 3001
+#EXPOSE 3000
 
 # Commande par défaut pour démarrer Nginx
-CMD ["npm", "start"]
+#CMD ["npm", "start"]
 

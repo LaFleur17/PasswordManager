@@ -8,6 +8,7 @@ dotenv.config();
 
 // Initialiser l'application Express
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 // Connexion à la base de données MongoDB
 connectDB();
@@ -25,8 +26,9 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Internal Server Error' });
 });
 
-// Définition du port
-const PORT = process.env.PORT || 5000;
+app.get('/', (req, res) => {
+  res.send('hellowrld')
+})
 
 // Lancer le serveur
 app.listen(PORT, () => {
