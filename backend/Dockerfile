@@ -5,18 +5,13 @@ FROM node:14
 WORKDIR /app/backend
 
 # Copier les fichiers nécessaires
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json package-lock.json .
 
 # Installer les dépendances
 RUN npm install 
 
 # Copier le reste des fichiers de l'application backend
-COPY backend .
+COPY . .
 
 # Exposer le port sur lequel le serveur backend écoute
-EXPOSE 5000
-
-# Commande par défaut pour démarrer le serveur
-CMD ["node", "src/index.js"]
-
+EXPOSE 3001
