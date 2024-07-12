@@ -2,6 +2,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const passwordRoutes = require("./routes/password");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -17,7 +18,8 @@ app.use("/auth", authRoutes);
 
 app.use("/user", userRoutes);
 
-// Error handler middleware
+app.use("/passwords", passwordRoutes);
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Internal Server Error" });
