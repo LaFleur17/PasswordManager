@@ -18,7 +18,7 @@ app.use("/auth", authRoutes);
 
 app.use("/user", userRoutes);
 
-app.use("/passwords", passwordRoutes);
+app.use("/password", passwordRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

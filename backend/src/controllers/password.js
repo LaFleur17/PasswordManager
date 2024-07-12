@@ -1,4 +1,3 @@
-// backend/src/controllers/passwordController.js
 const Password = require('../models/Password');
 const crypto = require('crypto');
 const clipboardy = require('node-clipboardy');
@@ -12,17 +11,22 @@ const generateStrongPassword = () => {
 exports.createPassword = async (req, res) => {
   try {
     const { siteName, customName, username, password, url, comments } = req.body;
+
     // Chiffrement du mot de passe avant de l'enregistrer
-    const encryptedPassword = crypto.createCipher('aes192', 'secret').update(password, 'utf8', 'hex');
+    const cipher = crypto.createCipher('aes-256-cbc', process.env.ENCRYPTION_KEY);
+    let encryptedPassword = cipher.update(password, 'utf8', 'hex');
+    encryptedPassword += cipher.final('hex');
+
     const newPassword = new Password({
       userId: req.user.id,
       siteName,
       customName,
       username,
-      encryptedPassword,
+      password: encryptedPassword,
       url,
       comments
     });
+
     await newPassword.save();
     res.status(201).json(newPassword);
   } catch (error) {
@@ -50,8 +54,17 @@ exports.updatePassword = async (req, res) => {
     if (password.userId.toString() !== req.user.id) {
       return res.status(403).json({ message: 'Forbidden' });
     }
+
     // Mettre à jour les champs nécessaires
     Object.assign(password, req.body);
+
+    if (req.body.password) {
+      const cipher = crypto.createCipher('aes-256-cbc', process.env.ENCRYPTION_KEY);
+      let encryptedPassword = cipher.update(req.body.password, 'utf8', 'hex');
+      encryptedPassword += cipher.final('hex');
+      password.password = encryptedPassword;
+    }
+
     await password.save();
     res.status(200).json(password);
   } catch (error) {
