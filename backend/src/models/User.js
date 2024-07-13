@@ -1,6 +1,6 @@
-// backend/src/models/User.js
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const validator = require("validator");
 
 const userSchema = new mongoose.Schema(
   {
@@ -8,15 +8,31 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      trim: true,
+      minlength: 5,
+      maxlength: 20,
     },
     email: {
       type: String,
       required: true,
       unique: true,
+      trim: true,
+      validate: {
+        validator: validator.isEmail,
+        message: "Invalid email address",
+      },
     },
     password: {
       type: String,
       required: true,
+      trim: true,
+      minlength: 8,
+      validate: {
+        validator: function(value) {
+          return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(value);
+        },
+        message: "Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one number and one special character",
+      },
     },
     settings: {
       language: {
@@ -47,7 +63,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Middleware pour hasher le mot de passe avant de sauvegarder dans la base de données
 userSchema.pre("save", async function (next) {
   try {
     if (!this.isModified("password")) {
@@ -61,15 +76,11 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-// Méthode pour comparer le mot de passe entré avec celui stocké
 userSchema.methods.comparePassword = async function (candidatePassword) {
   try {
     const isMatch = await bcrypt.compare(candidatePassword, this.password);
-    console.log("Comparing passwords:", candidatePassword, this.password); // Ajout du log pour les valeurs comparées
-    console.log("Password match result:", isMatch); // Ajout du log pour le résultat de la comparaison
     return isMatch;
   } catch (error) {
-    console.error("Error comparing passwords:", error);
     throw new Error("Error comparing passwords");
   }
 };
@@ -77,3 +88,4 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
+
