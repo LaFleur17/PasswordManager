@@ -4,13 +4,21 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const passwordRoutes = require("./routes/password");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const corsOptions = {
+  origin: "http://localhost:3001",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
 connectDB();
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
