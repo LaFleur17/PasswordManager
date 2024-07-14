@@ -47,6 +47,10 @@ const passwordSchema = new mongoose.Schema(
         message: 'URL non valide'
       }
     },
+    sharedWith: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }],
     comments: {
       type: String,
       maxlength: 500,
