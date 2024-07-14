@@ -1,4 +1,3 @@
-// backend/src/controllers/authController.js
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -12,7 +11,7 @@ const register = async (req, res, next) => {
     if (existingUser) {
       return res
         .status(400)
-        .json({ message: "Username or email already exists" });
+        .json({ message: "Username or email invalid" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("Hashed Password:", hashedPassword);
@@ -33,13 +32,13 @@ const login = async (req, res, next) => {
     // Recherchez l'utilisateur par nom d'utilisateur
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User or password invalid" });
     }
 
     const passwordMatch = await user.comparePassword(password);
     if (!passwordMatch) {
       console.log("Incorrect password for user:", username);
-      return res.status(401).json({ message: "Incorrect password" });
+      return res.status(401).json({ message: "User or password invalid" });
     }
 
     // Générez un token JWT pour l'utilisateur

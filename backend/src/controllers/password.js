@@ -4,9 +4,16 @@ const clipboardy = require('node-clipboardy');
 
 // Fonction pour générer des mots de passe forts
 const generateStrongPassword = () => {
-  return crypto.randomBytes(12).toString('hex'); // Génère un mot de passe aléatoire de 12 caractères
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+  let password = "";
+  for (let i = 0; i < 16; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    password += chars[randomIndex];
+  }
+  return password;
 };
 
+console.log(generateStrongPassword()); // Exemple d'utilisation pour générer un mot de passe
 // Création d'une fiche de mots de passe
 exports.createPassword = async (req, res) => {
   try {
