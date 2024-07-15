@@ -1,14 +1,13 @@
-// src/services/api.js
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "http://localhost:3000", // EDIT FAST
 });
 
 export const login = (username, password) =>
   api.post("/auth/login", { username, password });
-export const register = (username, password) =>
-  api.post("/auth/register", { username, password });
+export const register = (username, email, password) =>
+  api.post("/auth/register", { username, email, password });
 export const createPassword = (data, token) =>
   api.post("/password", data, {
     headers: { Authorization: `Bearer ${token}` },

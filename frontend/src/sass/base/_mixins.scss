@@ -1,0 +1,41 @@
+@mixin font-primary($size, $style: normal, $weight: normal) {
+  font-size: $size;
+  font-style: $style;
+  font-weight: $weight;
+
+  @if $weight == "normal" and $style == "normal" {
+    font-family: $font-primary;
+  } @else if $weight == "bold" and $style == "normal" {
+    font-family: "MyFont-Bold", sans-serif;
+  } @else if $weight == "normal" and $style == "italic" {
+    font-family: "MyFont-Italic", sans-serif;
+  } @else if $weight == "bold" and $style == "italic" {
+    font-family: "MyFont-BoldItalic", sans-serif;
+  } @else {
+    @error 'Invalid combination of font weight: #{$weight} and font style: #{$style}';
+  }
+}
+@mixin font-secondary($size, $style: normal, $weight: normal) {
+  font-size: $size;
+  font-style: $style;
+  font-weight: $weight;
+
+  @if $weight == "normal" and $style == "normal" {
+    font-family: $font-secondary;
+  } @else if $weight == "bold" and $style == "normal" {
+    font-family: "MyFont-Bold", sans-serif;
+  } @else if $weight == "normal" and $style == "italic" {
+    font-family: "MyFont-Italic", sans-serif;
+  } @else if $weight == "bold" and $style == "italic" {
+    font-family: "MyFont-BoldItalic", sans-serif;
+  } @else {
+    @error 'Invalid combination of font weight: #{$weight} and font style: #{$style}';
+  }
+}
+
+@mixin full-page($color-background: none) {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background-color: $color-background;
+}

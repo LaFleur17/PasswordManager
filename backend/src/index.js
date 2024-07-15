@@ -3,16 +3,17 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const passwordRoutes = require("./routes/password");
-const passwordCollaborationRoutes = require('./routes/passwordCollaboration');
+const passwordCollaborationRoutes = require("./routes/passwordCollaboration");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
+const PORTFRONTEND = process.env.PORT_FRONTEND;
 const corsOptions = {
-  origin: "http://localhost:3001",
+  origin: `http://localhost:${PORTFRONTEND}`,
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
@@ -29,7 +30,7 @@ app.use("/user", userRoutes);
 
 app.use("/password", passwordRoutes);
 
-app.use('/password-collaboration', passwordCollaborationRoutes);
+app.use("/password-collaboration", passwordCollaborationRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

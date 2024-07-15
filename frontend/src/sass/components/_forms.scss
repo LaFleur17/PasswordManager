@@ -1,0 +1,29 @@
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 2em;
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    label {
+      @include font-primary($font-size-regular);
+    }
+    input {
+      padding: 1em;
+      color: $color-background;
+      height: 2em;
+      border-radius: 5px;
+      background-color: $color-field;
+    }
+  }
+}
+
+.button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}

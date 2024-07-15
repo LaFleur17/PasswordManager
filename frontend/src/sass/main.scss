@@ -1,0 +1,20 @@
+// Importation des styles de base
+@import "base/variables";
+@import "base/mixins";
+@import "base/reset";
+@import "base/functions";
+@import "base/typography";
+@import "base/animations";
+// Importation des styles des composants
+@import "components/navigation";
+@import "components/login";
+@import "components/register";
+@import "components/forms";
+@import "components/buttons";
+@import "components/passwordmanager";
+// Importation des pages
+@import "pages/homepage";
+@import "pages/dashboard";
+// Importation des modals
+@import "modals/accessdashboard";
+// Importation des styles des fournisseurs

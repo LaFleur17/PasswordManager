@@ -1,0 +1,14 @@
+.dashboard {
+  @include full-page();
+  display: flex;
+  flex-direction: column;
+  .title-section {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__title {
+      @include font-primary($font-size-xl);
+    }
+  }
+}

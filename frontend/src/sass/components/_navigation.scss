@@ -1,0 +1,19 @@
+.nav {
+  align-self: flex-end;
+  padding-right: 1em;
+  &__links {
+    display: flex;
+    gap: 1em;
+    flex-direction: row;
+    @include font-secondary($font-size-regular);
+  }
+  &__link {
+    line-height: 2em;
+    color: $color-white;
+    border-top: 2px solid none;
+  }
+  &__active-link {
+    line-height: 2em;
+    border-top: 2px solid $color-white;
+  }
+}
