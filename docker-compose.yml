@@ -1,22 +1,25 @@
 version: '3'
+
 services:
   backend:
-    build: ./backend
-    ports:
-      - "3001:3001"
-    command: npm run dev
-    environment:
-      NODE_ENV: production
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     volumes:
-      - ./backend:/app/backend
-      - /app/backend/node_modules
+      - ./backend:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
 
-#  frontend:
-#    build: frontend
-#    ports:
-#      - "80:80"
-#    environment:
-#      NODE_ENV: production
-#      # Ajoutez d'autres variables d'environnement nécessaires ici
-#    volumes:
-#      - ./frontend:/app/frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=development
+
