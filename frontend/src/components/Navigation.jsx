@@ -36,7 +36,7 @@ const Navigation = () => {
             </Link>
           </li>
         )}
-        {/* Afficher le lien Go to Dashboard seulement si l'utilisateur a un token */}
+        {}
         {token && (
           <li>
             <NavLink
