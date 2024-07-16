@@ -5,7 +5,7 @@
     display: flex;
     gap: 1em;
     flex-direction: row;
-    @include font-secondary($font-size-regular);
+    font-family: $font-secondary;
   }
   &__link {
     line-height: 2em;

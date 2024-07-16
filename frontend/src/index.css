@@ -165,14 +165,14 @@ blockquote {
 @font-face {
   font-family: "Poppins-Regular";
   src: url("./assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
 }
 @font-face {
   font-family: "Roboto-Regular";
   src: url("./assets/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("./assets/fonts/Roboto/Roboto-Light") format("truetype");
 }
 .nav {
   align-self: flex-end;
@@ -182,9 +182,6 @@ blockquote {
   display: flex;
   gap: 1em;
   flex-direction: row;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: normal;
   font-family: "Roboto-Regular", sans-serif;
 }
 .nav__link {
@@ -235,10 +232,8 @@ blockquote {
   gap: 0.5em;
 }
 .form-fields .form-field label {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: normal;
   font-family: "Poppins-Regular", sans-serif;
+  font-size: 16px;
 }
 .form-fields .form-field input {
   padding: 1em;
@@ -257,19 +252,66 @@ blockquote {
 }
 
 .cta-button {
-  background-color: rgba(6, 238, 176, 0.15);
-  border: 1px solid rgba(6, 238, 176, 0.25);
-  color: rgba(170, 242, 223, 0.8);
+  background-color: rgba(6, 238, 176, 0.35);
+  border: 1px solid rgba(6, 238, 176, 0.5);
+  color: #d9f2ec;
+  font-family: "Poppins-Regular", sans-serif;
   text-align: center;
-  transition: 0.5s;
+  transition: 0.4s;
   border-radius: 2px;
   padding: 0.5em 2em;
+  cursor: pointer;
 }
 
 .cta-button:hover {
-  background-color: rgba(6, 238, 176, 0.35);
-  border: 1px solid rgba(6, 238, 176, 0.5);
-  color: rgba(var(--text-color), 0.9);
+  background-color: rgba(6, 238, 176, 0.15);
+  border: 1px solid rgba(6, 238, 176, 0.25);
+  color: #d9f2ec;
+}
+
+.password-manager {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.password-manager .table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px outset rgba(217, 242, 236, 0.8);
+  border-radius: 5px;
+}
+.password-manager .table .table-row {
+  background-color: #023326;
+  display: flex;
+  flex-direction: row;
+  height: 48px;
+  border: 1px solid rgba(217, 242, 236, 0.2);
+}
+.password-manager .table .table-row:first-child {
+  background-color: #02271d;
+  height: 60px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.password-manager .table .table-row:first-child .table-header {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 16px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.password-manager .table .table-row .table-cell {
+  font-family: "Roboto-Light", sans-serif;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
 .home-page {
@@ -287,10 +329,8 @@ blockquote {
   align-items: center;
 }
 .home-page .hero__title {
-  font-size: 64px;
-  font-style: normal;
-  font-weight: normal;
   font-family: "Poppins-Regular", sans-serif;
+  font-size: 64px;
 }
 
 .dashboard {
@@ -300,18 +340,18 @@ blockquote {
   background-color: none;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 80px;
 }
 .dashboard .title-section {
-  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .dashboard .title-section__title {
-  font-size: 64px;
-  font-style: normal;
-  font-weight: normal;
   font-family: "Poppins-Regular", sans-serif;
+  font-size: 64px;
 }
 
 .access-dashboard {

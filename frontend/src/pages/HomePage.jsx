@@ -9,9 +9,10 @@ const HomePage = () => {
     <div className="home-page">
       <Navigation />
       <div className="hero">
-        <h1 className="hero__title">PASSWORD MANAGER</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <button onClick={() => setIsModalOpen(true)}>Access Dashboard</button>
+        <h1 className="hero__title">Password Manager</h1>
+        <button className="cta-button" onClick={() => setIsModalOpen(true)}>
+          Go to Dashboard
+        </button>
       </div>
       {isModalOpen && (
         <AccessDashboard closeModal={() => setIsModalOpen(false)} />

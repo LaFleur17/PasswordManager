@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-
 import { NavLink, Link } from "react-router-dom";
 import AccessDashboard from "../pages/modals/AccessDashboard";
 import { AuthContext } from "../context/AuthContext";
@@ -11,6 +10,10 @@ const Navigation = () => {
   const handleOpenModal = (e) => {
     e.preventDefault();
     setIsModalOpen(true);
+  };
+  const handleLogout = () => {
+    setToken(null);
+    navigate("/login");
   };
   return (
     <div className="nav">
@@ -32,7 +35,7 @@ const Navigation = () => {
               to={"/access"}
               onClick={handleOpenModal}
             >
-              Log in/Register
+              Log in
             </Link>
           </li>
         )}
@@ -46,6 +49,13 @@ const Navigation = () => {
               }
             >
               Go to Dashboard →
+            </NavLink>
+          </li>
+        )}
+        {token && (
+          <li>
+            <NavLink onClick={handleLogout} to={"/"} className="nav__link">
+              Log out Ф
             </NavLink>
           </li>
         )}

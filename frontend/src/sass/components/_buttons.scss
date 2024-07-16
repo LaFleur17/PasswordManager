@@ -1,15 +1,17 @@
 .cta-button {
-  background-color: rgba($color-primary, 0.15);
-  border: 1px solid rgba($color-primary, 0.25);
-  color: rgba($color-field, 0.8);
+  background-color: rgba($color-primary, 0.35);
+  border: 1px solid rgba($color-primary, 0.5);
+  color: $color-white;
+  font-family: $font-primary;
   text-align: center;
-  transition: 0.5s;
+  transition: 0.4s;
   border-radius: 2px;
   padding: 0.5em 2em;
+  cursor: pointer;
 }
 
 .cta-button:hover {
-  background-color: rgba($color-primary, 0.35);
-  border: 1px solid rgba($color-primary, 0.5);
-  color: rgba(var(--text-color), 0.9);
+  background-color: rgba($color-primary, 0.15);
+  border: 1px solid rgba($color-primary, 0.25);
+  color: $color-white;
 }

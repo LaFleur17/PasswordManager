@@ -2,13 +2,16 @@
   @include full-page();
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 80px;
   .title-section {
-    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     &__title {
-      @include font-primary($font-size-xl);
+      font-family: $font-primary;
+      font-size: $font-size-xl;
     }
   }
 }
