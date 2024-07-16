@@ -103,7 +103,8 @@ const deleteLibrary = async (req, res) => {
 
 // Ajouter un collaborateur à une bibliothèque
 const addCollaborator = async (req, res) => {
-  const { libraryId, collaboratorId, permission } = req.body;
+  const { collaboratorId, permission } = req.body;
+  const { libraryId } = req.params;
 
   try {
     // Vérifier si la bibliothèque existe
@@ -208,7 +209,8 @@ const updateCollaboratorPermissions = async (req, res) => {
 
 // Ajouter un mot de passe existant à une bibliothèque
 const addPasswordToLibrary = async (req, res) => {
-  const { libraryId, passwordId } = req.body;
+  const { passwordId } = req.body;
+  const { libraryId } = req.params;
 
   try {
     // Vérifier si la bibliothèque existe
