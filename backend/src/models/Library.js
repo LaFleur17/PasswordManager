@@ -1,35 +1,43 @@
-// models/Library.js
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const librarySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  description: {
-    type: String,
-    required: true,
-  },
-  userId: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  sharedWith: [
-    {
+  collaborators: [{
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-    }
-  ],
-  passwords: [
-    {
+    },
+    permission: {
+      type: String,
+      enum: ['read', 'write'],
+      default: 'read',
+    },
+  }],
+  passwords: [{
+    password: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Password',
-    }
-  ],
-}, { timestamps: true });
+    },
+    addedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    addedAt: {
+      type: Date,
+      default: Date.now,
+    },
+  }],
+});
 
-const Library = mongoose.model("Library", librarySchema);
+const Library = mongoose.model('Library', librarySchema);
 
 module.exports = Library;
 
