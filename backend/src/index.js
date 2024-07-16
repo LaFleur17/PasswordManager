@@ -4,6 +4,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const passwordRoutes = require("./routes/password");
 const passwordCollaborationRoutes = require("./routes/passwordCollaboration");
+const libraryRoutes = require('./routes/library');
 const dotenv = require("dotenv");
 const cors = require("cors");
 
@@ -34,6 +35,8 @@ app.use("/user", userRoutes);
 app.use("/password", passwordRoutes);
 
 app.use("/password-collaboration", passwordCollaborationRoutes);
+
+app.use('/libraries', libraryRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

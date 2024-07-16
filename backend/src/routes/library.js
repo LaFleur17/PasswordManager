@@ -1,32 +1,39 @@
-// routes/library.js
 const express = require('express');
-const { authenticate } = require('../middlewares/auth');
-const libraryController = require('../controllers/libraryController');
-const LibraryController = require('../controllers/libraryPasswordController');
 const router = express.Router();
+const libraryController = require('../controllers/library');
+const { authenticate } = require('../middlewares/auth');
 
-router.use(authenticate);
+// Routes pour les bibliothèques
 
-// Route pour créer une nouvelle bibliothèque
-router.post('/', libraryController.createLibrary);
+// GET /libraries
+router.get('/', authenticate, libraryController.getLibraries);
 
-// Route pour obtenir toutes les bibliothèques de l'utilisateur
-router.get('/', libraryController.getLibraries);
+// GET /libraries/:libraryId
+router.get('/:libraryId', authenticate, libraryController.getLibraryById);
 
-// Route pour mettre à jour une bibliothèque
-router.put('/:id', libraryController.updateLibrary);
+// POST /libraries
+router.post('/', authenticate, libraryController.createLibrary);
 
-// Route pour supprimer une bibliothèque
-router.delete('/:id', libraryController.deleteLibrary);
+// PUT /libraries/:libraryId
+router.put('/:libraryId', authenticate, libraryController.updateLibrary);
 
-// Route pour ajouter un mot de passe à une bibliothèque
-router.post('/add-password', LibraryController.addPasswordToLibrary);
+// DELETE /libraries/:libraryId
+router.delete('/:libraryId', authenticate, libraryController.deleteLibrary);
 
-// Route pour mettre à jour un mot de passe dans une bibliothèque
-router.put('/update-password', LibraryController.updatePasswordInLibrary);
+// POST /libraries/:libraryId/collaborators
+router.post('/:libraryId/collaborators', authenticate, libraryController.addCollaborator);
 
-// Route pour supprimer un mot de passe d'une bibliothèque
-router.delete('/delete-password', LibraryController.deletePasswordFromLibrary);
+// DELETE /libraries/:libraryId/collaborators/:collaboratorId
+router.delete('/:libraryId/collaborators/:collaboratorId', authenticate, libraryController.removeCollaborator);
+
+// PUT /libraries/:libraryId/collaborators/:collaboratorId/permissions
+router.put('/:libraryId/collaborators/:collaboratorId/permissions', authenticate, libraryController.updateCollaboratorPermissions);
+
+// POST /libraries/:libraryId/passwords
+router.post('/:libraryId/passwords', authenticate, libraryController.addPasswordToLibrary);
+
+// DELETE /libraries/:libraryId/passwords/:passwordId
+router.delete('/:libraryId/passwords/:passwordId', authenticate, libraryController.removePasswordFromLibrary);
 
 module.exports = router;
 
