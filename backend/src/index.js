@@ -12,8 +12,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 const PORTFRONTEND = process.env.PORT_FRONTEND;
+const IP1 = process.env.IP1;
+const IP2 = process.env.IP2;
+
 const corsOptions = {
-  origin: `http://localhost:${PORTFRONTEND}`,
+  origin: `${IP2}` || `${IP1}:${PORTFRONTEND}`,
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
