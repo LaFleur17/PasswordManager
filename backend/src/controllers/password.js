@@ -17,7 +17,7 @@ console.log(generateStrongPassword()); // Exemple d'utilisation pour générer u
 // Création d'une fiche de mots de passe
 exports.createPassword = async (req, res) => {
   try {
-    const { siteName, customName, username, password, url, comments } = req.body;
+    const { siteName, tags, username, password, url, comments } = req.body;
 
     // Chiffrement du mot de passe avant de l'enregistrer
     const cipher = crypto.createCipher('aes-256-cbc', process.env.ENCRYPTION_KEY);
@@ -27,7 +27,7 @@ exports.createPassword = async (req, res) => {
     const newPassword = new Password({
       userId: req.user.id,
       siteName,
-      customName,
+      tags,
       username,
       password: encryptedPassword,
       url,
@@ -99,15 +99,28 @@ exports.deletePassword = async (req, res) => {
 // Copier le mot de passe dans le presse-papiers
 exports.copyPasswordToClipboard = async (req, res) => {
   try {
+    // Rechercher le mot de passe par ID
     const password = await Password.findById(req.params.id);
+
     if (!password) {
       return res.status(404).json({ message: 'Password not found' });
     }
+
+    // Vérification de l'utilisateur
     if (password.userId.toString() !== req.user.id) {
       return res.status(403).json({ message: 'Forbidden' });
     }
+
+    // Déchiffrer le mot de passe
     const decryptedPassword = password.decryptPassword();
+
+    // Copier le mot de passe dans le presse-papiers
     clipboardy.writeSync(decryptedPassword);
+
+    // Mise à jour de la date de la dernière copie
+    password.lastCopied = new Date();
+    await password.save();
+
     res.status(200).json({ message: 'Password copied to clipboard' });
   } catch (error) {
     res.status(500).json({ message: error.message });

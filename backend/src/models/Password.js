@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const validator = require("validator");
-
+const predefinedTags = ['Work', 'Personal'];
 const passwordSchema = new mongoose.Schema(
   {
     userId: {
@@ -16,11 +16,17 @@ const passwordSchema = new mongoose.Schema(
       minlength: 3,
       maxlength: 50,
     },
-    customName: {
+    tags: [{
       type: String,
       trim: true,
-      maxlength: 50,
-    },
+      maxlength: 20,
+      validate: {
+        validator: function(value) {
+          return predefinedTags.includes(value) || validator.isAlphanumeric(value.replace(/\s/g, ''));
+        },
+        message: props => `${props.value} is not a valid tag`
+      }
+    }],
     username: {
       type: String,
       required: true,
@@ -50,6 +56,12 @@ const passwordSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     }],
+    lastCopied: {
+      type: Date
+    }
+  },
+  {
+    timestamps: true,
     comments: {
       type: String,
       maxlength: 500,
