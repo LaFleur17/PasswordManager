@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import React, { useState } from "react";
 import { login as loginService } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
 
 const Login = ({ closeModal }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(AuthContext);
+  const signIn = useSignIn();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
@@ -14,10 +14,24 @@ const Login = ({ closeModal }) => {
     e.preventDefault();
 
     try {
-      const token = await loginService(username, password);
-      login(token);
-      closeModal();
-      navigate("/dashboard");
+      const response = await loginService(username, password);
+      const success = signIn({
+        auth: {
+          token: response.data.token,
+          type: "Bearer",
+        },
+        userState: {
+          name: "React User",
+          uid: username,
+        },
+      });
+
+      if (success) {
+        closeModal();
+        navigate("/dashboard");
+      } else {
+        setError("Échec de la connexion");
+      }
     } catch (error) {
       console.error("Login failed:", error);
       if (error.response && error.response.status === 401) {

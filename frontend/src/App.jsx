@@ -1,37 +1,36 @@
-import React, { useContext } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
-import { AuthProvider, AuthContext } from "./context/AuthContext"; // Importez AuthContext ici
+import AuthProvider from "react-auth-kit/AuthProvider";
+import createStore from "react-auth-kit/createStore";
+import RequireAuth from "@auth-kit/react-router/RequireAuth";
+
+const store = createStore({
+  authName: "_auth",
+  authType: "cookie",
+  cookieDomain: window.location.hostname,
+  cookieSecure: false, // set true if https is used
+});
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <BrowserRouter>
+      <AuthProvider store={store}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute>
+              <RequireAuth fallbackPath={"/"}>
                 <DashboardPage />
-              </ProtectedRoute>
+              </RequireAuth>
             }
           />
         </Routes>
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
-
-const ProtectedRoute = ({ children }) => {
-  const { token } = useContext(AuthContext); // Utilisez useContext directement sans React.
-  return token ? children : <Navigate replace to="/" />;
-};
 
 export default App;

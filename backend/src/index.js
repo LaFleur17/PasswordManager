@@ -4,7 +4,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const passwordRoutes = require("./routes/password");
 const passwordCollaborationRoutes = require("./routes/passwordCollaboration");
-const libraryRoutes = require('./routes/library');
+const libraryRoutes = require("./routes/library");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
@@ -17,7 +17,7 @@ const IP1 = process.env.IP1;
 const IP2 = process.env.IP2;
 
 const corsOptions = {
-  origin: `${IP2}` || `${IP1}:${PORTFRONTEND}`,
+  origin: IP2 || `${IP1}:${PORTFRONTEND}`,
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
@@ -36,7 +36,7 @@ app.use("/password", passwordRoutes);
 
 app.use("/password-collaboration", passwordCollaborationRoutes);
 
-app.use('/libraries', libraryRoutes);
+app.use("/libraries", libraryRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

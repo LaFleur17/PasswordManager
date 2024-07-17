@@ -271,47 +271,87 @@ blockquote {
 
 .password-manager {
   width: 80%;
+  flex-direction: column;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  gap: 2em;
 }
 .password-manager .table {
   width: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px outset rgba(217, 242, 236, 0.8);
   border-radius: 5px;
 }
 .password-manager .table .table-row {
-  background-color: #023326;
+  background-color: #024f3b;
   display: flex;
   flex-direction: row;
-  height: 48px;
-  border: 1px solid rgba(217, 242, 236, 0.2);
+  height: 4em;
+  border-bottom: 1px inset rgba(217, 242, 236, 0.2);
 }
 .password-manager .table .table-row:first-child {
   background-color: #02271d;
-  height: 60px;
+  height: 56px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  border: none;
 }
 .password-manager .table .table-row:first-child .table-header {
+  padding-left: 1em;
+  position: relative;
   font-family: "Roboto-Regular", sans-serif;
   font-size: 16px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex: 1;
 }
 .password-manager .table .table-row .table-cell {
+  padding-left: 1em;
   font-family: "Roboto-Light", sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex: 1;
+}
+.password-manager .table .table-row .table-cell .sitename-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.password-manager .passwords-filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  padding-left: 0.5em;
+}
+.password-manager .passwords-filters label {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 16px;
+}
+.password-manager .passwords-filters .search-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+.password-manager .passwords-filters .search-section input {
+  width: 240px;
+  padding: 1em;
+  color: #011a13;
+  height: 2em;
+  border-radius: 5px;
+  background-color: #aaf2df;
+}
+.password-manager .passwords-filters .search-section .cta-button {
+  scale: 0.9;
+  border-radius: 5px;
 }
 
 .home-page {
