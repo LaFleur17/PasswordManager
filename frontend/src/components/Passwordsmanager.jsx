@@ -6,6 +6,7 @@ import {
   getPaginationRowModel,
 } from "@tanstack/react-table";
 import { flexRender } from "@tanstack/react-table";
+import Modal from "react-modal";
 
 import { getPasswords } from "../services/api";
 import Filters from "./Passwordsfilters";
@@ -58,6 +59,11 @@ const Passwordmanager = ({ authHeader }) => {
   // toutes les fonctions qui viennent de la librairie
   const [data, setData] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Étape 1
+  const [rowSelection, setRowSelection] = useState({}); //manage your own row selection state
+
+  const toggleModal = () => setIsModalOpen(!isModalOpen); // Étape 2
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -67,13 +73,16 @@ const Passwordmanager = ({ authHeader }) => {
         console.error("GetPasswords failed:", error);
       }
     };
-
     fetchData();
   }, [authHeader.authToken]);
+
   const table = useReactTable({
     columns,
     data,
+    onRowSelectionChange: setRowSelection,
+    getRowId: (row) => row.uuid, //use the row's uuid from your database as the row id
     state: {
+      rowSelection,
       columnFilters,
     },
     getCoreRowModel: getCoreRowModel(),
@@ -90,13 +99,37 @@ const Passwordmanager = ({ authHeader }) => {
         ),
     },
   });
+  console.log(table.getState().rowSelection); //get the row selection state - { 1: true, 2: false, etc... }
+  console.log(table.getSelectedRowModel().rows); //get full client-side selected rows
+  console.log(table.getFilteredSelectedRowModel().rows); //get filtered client-side selected rows
+  console.log(table.getGroupedSelectedRowModel().rows); //get grouped client-side selected rows
   return (
     <div className="password-manager">
-      <Filters
-        columnFilters={columnFilters}
-        setColumnFilters={setColumnFilters}
-      />
-      <PasswordsCreator authHeader={authHeader} data={data} setData={setData} />
+      <div className="search-add-section">
+        <Filters
+          columnFilters={columnFilters}
+          setColumnFilters={setColumnFilters}
+        />
+        <button className="cta-button" onClick={toggleModal}>
+          Add a password
+        </button>{" "}
+        {/* Étape 3 */}
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={toggleModal}
+          className="modal-content-class"
+          overlayClassName="modal-overlay-class"
+        >
+          {" "}
+          {/* Étape 4 */}
+          <PasswordsCreator
+            authHeader={authHeader}
+            data={data}
+            setData={setData}
+          />
+          <button onClick={toggleModal}>Close</button>
+        </Modal>
+      </div>
       <div className="table">
         {table.getHeaderGroups().map((headerGroup) => (
           <div className="table-row" key={headerGroup.id}>

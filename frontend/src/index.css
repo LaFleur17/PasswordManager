@@ -276,6 +276,13 @@ blockquote {
   justify-content: center;
   align-items: flex-start;
   gap: 2em;
+  background-color: #011a13;
+}
+.password-manager .search-add-section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }
 .password-manager .table {
   width: 100%;
@@ -292,16 +299,17 @@ blockquote {
 }
 .password-manager .table .table-row:first-child {
   background-color: #02271d;
-  height: 56px;
+  height: 74px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border: none;
 }
 .password-manager .table .table-row:first-child .table-header {
-  padding-left: 1em;
+  padding-left: 1.5em;
+  color: #d9f2ec;
   position: relative;
   font-family: "Roboto-Regular", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   display: flex;
@@ -310,7 +318,8 @@ blockquote {
   flex: 1;
 }
 .password-manager .table .table-row .table-cell {
-  padding-left: 1em;
+  padding-left: 1.2em;
+  color: #aaf2df;
   font-family: "Roboto-Light", sans-serif;
   font-size: 16px;
   display: flex;
@@ -332,8 +341,8 @@ blockquote {
   padding-left: 0.5em;
 }
 .password-manager .passwords-filters label {
-  font-family: "Roboto-Regular", sans-serif;
-  font-size: 16px;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 18px;
 }
 .password-manager .passwords-filters .search-section {
   display: flex;
@@ -352,6 +361,37 @@ blockquote {
 .password-manager .passwords-filters .search-section .cta-button {
   scale: 0.9;
   border-radius: 5px;
+}
+
+.modal-content-class {
+  background-color: #02271d;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.modal-overlay-class {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  backgroundcolor: "rgba(0, 0, 0, 0.75)";
+}
+
+.passwords-creator {
+  padding: 2em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.passwords-creator .form-fields {
+  gap: 1em;
+}
+.passwords-creator .form-fields .form-field {
+  gap: 0.5em;
 }
 
 .home-page {
@@ -382,7 +422,7 @@ blockquote {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 80px;
+  gap: 120px;
 }
 .dashboard .title-section {
   display: flex;
