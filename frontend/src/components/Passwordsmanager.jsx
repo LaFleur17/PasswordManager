@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
+
+import { flexRender } from "@tanstack/react-table";
 import {
   useReactTable,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
 } from "@tanstack/react-table";
-import { flexRender } from "@tanstack/react-table";
-import Modal from "react-modal";
-
-import { getPasswords } from "../services/api";
-import Filters from "./Passwordsfilters";
-import PasswordsCreator from "./Passwordscreator";
+import Searchbar from "./Searchbar";
+import Addform from "./Addform";
 
 const columns = [
   {
@@ -54,40 +52,31 @@ const columns = [
   },
 ];
 
-const Passwordmanager = ({ authHeader }) => {
-  //note: data needs a "stable" reference in order to prevent infinite re-renders
-  // toutes les fonctions qui viennent de la librairie
-  const [data, setData] = useState([]);
+const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [columnFilters, setColumnFilters] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Étape 1
-  const [rowSelection, setRowSelection] = useState({}); //manage your own row selection state
+  const [rowSelection, setRowSelection] = useState({});
+  const [showAddForm, setShowAddForm] = useState(false);
 
-  const toggleModal = () => setIsModalOpen(!isModalOpen); // Étape 2
+  const toggleAddForm = () => setShowAddForm(!showAddForm);
+
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getPasswords(authHeader);
-        setData(response.data); // Assurez-vous que cela correspond au format attendu par votre tableau
-      } catch (error) {
-        console.error("GetPasswords failed:", error);
-      }
-    };
-    fetchData();
+    showPasswords();
   }, [authHeader.authToken]);
 
   const table = useReactTable({
     columns,
     data,
-    onRowSelectionChange: setRowSelection,
-    getRowId: (row) => row.uuid, //use the row's uuid from your database as the row id
+    getRowId: (row) => row.uuid,
     state: {
-      rowSelection,
       columnFilters,
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onColumnFiltersChange: setColumnFilters,
     meta: {
       updateData: (rowIndex, columnId, value) =>
         setData((previous) =>
@@ -99,37 +88,21 @@ const Passwordmanager = ({ authHeader }) => {
         ),
     },
   });
-  console.log(table.getState().rowSelection); //get the row selection state - { 1: true, 2: false, etc... }
-  console.log(table.getSelectedRowModel().rows); //get full client-side selected rows
-  console.log(table.getFilteredSelectedRowModel().rows); //get filtered client-side selected rows
-  console.log(table.getGroupedSelectedRowModel().rows); //get grouped client-side selected rows
+
   return (
     <div className="password-manager">
       <div className="search-add-section">
-        <Filters
+        <Searchbar
           columnFilters={columnFilters}
           setColumnFilters={setColumnFilters}
         />
-        <button className="cta-button" onClick={toggleModal}>
-          Add a password
-        </button>{" "}
-        {/* Étape 3 */}
-        <Modal
-          isOpen={isModalOpen}
-          onRequestClose={toggleModal}
-          className="modal-content-class"
-          overlayClassName="modal-overlay-class"
-        >
-          {" "}
-          {/* Étape 4 */}
-          <PasswordsCreator
-            authHeader={authHeader}
-            data={data}
-            setData={setData}
-          />
-          <button onClick={toggleModal}>Close</button>
-        </Modal>
+        <button className="cta-button" onClick={toggleAddForm}>
+          {showAddForm ? "Hide Add Form" : "Add a password"}
+        </button>
       </div>
+      {showAddForm && (
+        <Addform authHeader={authHeader} data={data} setData={setData} />
+      )}
       <div className="table">
         {table.getHeaderGroups().map((headerGroup) => (
           <div className="table-row" key={headerGroup.id}>
@@ -163,18 +136,8 @@ const Passwordmanager = ({ authHeader }) => {
         {table.getPageCount()}
       </p>
       <div>
-        <button
-          onClick={() => table.previousPage()}
-          isDisabled={!table.getCanPreviousPage()}
-        >
-          {"<"}
-        </button>
-        <button
-          onClick={() => table.nextPage()}
-          isDisabled={!table.getCanNextPage()}
-        >
-          {">"}
-        </button>
+        <button onClick={() => table.previousPage()}>{"<"}</button>
+        <button onClick={() => table.nextPage()}>{">"}</button>
       </div>
     </div>
   );

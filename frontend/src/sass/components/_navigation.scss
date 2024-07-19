@@ -5,15 +5,15 @@
     display: flex;
     gap: 1em;
     flex-direction: row;
-    font-family: $font-secondary;
   }
   &__link {
     line-height: 2em;
-    color: $color-white;
-    border-top: 2px solid none;
+    font-family: $font-secondary-regular;
+    color: $color-text;
   }
   &__active-link {
     line-height: 2em;
-    border-top: 2px solid $color-white;
+    font-family: $font-secondary-medium;
+    color: $color-white;
   }
 }

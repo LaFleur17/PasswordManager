@@ -67,9 +67,8 @@ q::after {
 /* Set a consistent background color and text color */
 body {
   background: $color-background;
-  color: $color-white;
+  color: $color-text;
   font-family: sans-serif;
-  line-height: 1.5;
 }
 
 /* Remove default border on elements */

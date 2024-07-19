@@ -65,10 +65,9 @@ q::after {
 
 /* Set a consistent background color and text color */
 body {
-  background: #011a13;
-  color: #d9f2ec;
+  background: #141f1c;
+  color: #9aada9;
   font-family: sans-serif;
-  line-height: 1.5;
 }
 
 /* Remove default border on elements */
@@ -163,16 +162,12 @@ blockquote {
 }
 
 @font-face {
-  font-family: "Poppins-Regular";
-  src: url("./assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-family: "Geist-Medium";
+  src: url("./assets/fonts/Geist-1.3.0/Geist-1.3.0/statics-woff/Geist-Medium.woff") format("woff"), url("./assets/fonts/Geist-1.3.0/Geist-1.3.0/statics-woff/Geist-Medium.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Roboto-Regular";
-  src: url("./assets/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Roboto-Regular";
-  src: url("./assets/fonts/Roboto/Roboto-Light") format("truetype");
+  font-family: "Geist-Regular";
+  src: url("./assets/fonts/Geist-1.3.0/Geist-1.3.0/statics-woff/Geist-Regular.woff") format("woff"), url("./assets/fonts/Geist-1.3.0/Geist-1.3.0/statics-woff/Geist-Regular.woff2") format("woff2");
 }
 .nav {
   align-self: flex-end;
@@ -182,20 +177,20 @@ blockquote {
   display: flex;
   gap: 1em;
   flex-direction: row;
-  font-family: "Roboto-Regular", sans-serif;
 }
 .nav__link {
   line-height: 2em;
-  color: #d9f2ec;
-  border-top: 2px solid none;
+  font-family: "Geist-Regular", sans-serif;
+  color: #9aada9;
 }
 .nav__active-link {
   line-height: 2em;
-  border-top: 2px solid #d9f2ec;
+  font-family: "Geist-Medium", sans-serif;
+  color: #fafffe;
 }
 
 .login {
-  background-color: #02271d;
+  background-color: #141f1c;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 50%;
@@ -208,7 +203,7 @@ blockquote {
 }
 
 .register {
-  background-color: #02271d;
+  background-color: #141f1c;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 50%;
@@ -225,6 +220,9 @@ blockquote {
   flex-direction: column;
   width: 50%;
   gap: 2em;
+  font-family: "Geist-Regular", sans-serif;
+  color: #9aada9;
+  font-size: 12px;
 }
 .form-fields .form-field {
   display: flex;
@@ -232,15 +230,14 @@ blockquote {
   gap: 0.5em;
 }
 .form-fields .form-field label {
-  font-family: "Poppins-Regular", sans-serif;
   font-size: 16px;
+  color: #fafffe;
 }
 .form-fields .form-field input {
   padding: 1em;
-  color: #011a13;
   height: 2em;
   border-radius: 5px;
-  background-color: #aaf2df;
+  border: 1px solid #293d38;
 }
 
 .button-section {
@@ -252,21 +249,22 @@ blockquote {
 }
 
 .cta-button {
-  background-color: rgba(6, 238, 176, 0.35);
-  border: 1px solid rgba(6, 238, 176, 0.5);
-  color: #d9f2ec;
-  font-family: "Poppins-Regular", sans-serif;
+  background-color: rgba(0, 204, 149, 0.35);
+  border: 1px solid rgba(0, 204, 149, 0.5);
+  color: #fafffe;
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
   text-align: center;
   transition: 0.4s;
-  border-radius: 2px;
+  border-radius: 5px;
   padding: 0.5em 2em;
   cursor: pointer;
 }
 
 .cta-button:hover {
-  background-color: rgba(6, 238, 176, 0.15);
-  border: 1px solid rgba(6, 238, 176, 0.25);
-  color: #d9f2ec;
+  background-color: rgba(0, 204, 149, 0.15);
+  border: 1px solid rgba(0, 204, 149, 0.25);
+  color: #fafffe;
 }
 
 .password-manager {
@@ -276,7 +274,7 @@ blockquote {
   justify-content: center;
   align-items: flex-start;
   gap: 2em;
-  background-color: #011a13;
+  background-color: #141f1c;
 }
 .password-manager .search-add-section {
   display: flex;
@@ -291,25 +289,21 @@ blockquote {
   border-radius: 5px;
 }
 .password-manager .table .table-row {
-  background-color: #024f3b;
   display: flex;
   flex-direction: row;
-  height: 4em;
-  border-bottom: 1px inset rgba(217, 242, 236, 0.2);
+  height: 48px;
+  border: 1px solid #293d38;
 }
 .password-manager .table .table-row:first-child {
-  background-color: #02271d;
-  height: 74px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  height: 40px;
   border: none;
 }
 .password-manager .table .table-row:first-child .table-header {
   padding-left: 1.5em;
-  color: #d9f2ec;
+  color: #fafffe;
   position: relative;
-  font-family: "Roboto-Regular", sans-serif;
-  font-size: 18px;
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   display: flex;
@@ -317,11 +311,15 @@ blockquote {
   align-items: center;
   flex: 1;
 }
+.password-manager .table .table-row:nth-child(2) {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
 .password-manager .table .table-row .table-cell {
   padding-left: 1.2em;
-  color: #aaf2df;
-  font-family: "Roboto-Light", sans-serif;
-  font-size: 16px;
+  color: #9aada9;
+  font-family: "Geist-Regular", sans-serif;
+  font-size: 12px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -341,8 +339,9 @@ blockquote {
   padding-left: 0.5em;
 }
 .password-manager .passwords-filters label {
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 18px;
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
+  color: #fafffe;
 }
 .password-manager .passwords-filters .search-section {
   display: flex;
@@ -353,18 +352,13 @@ blockquote {
 .password-manager .passwords-filters .search-section input {
   width: 240px;
   padding: 1em;
-  color: #011a13;
   height: 2em;
   border-radius: 5px;
-  background-color: #aaf2df;
-}
-.password-manager .passwords-filters .search-section .cta-button {
-  scale: 0.9;
-  border-radius: 5px;
+  border: 1px solid #293d38;
 }
 
 .modal-content-class {
-  background-color: #02271d;
+  background-color: #141f1c;
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -378,7 +372,7 @@ blockquote {
   justify-content: center;
   width: 100%;
   height: 100%;
-  backgroundcolor: "rgba(0, 0, 0, 0.75)";
+  background-color: "rgba(0, 0, 0, 0.75)";
 }
 
 .passwords-creator {
@@ -409,8 +403,8 @@ blockquote {
   align-items: center;
 }
 .home-page .hero__title {
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 64px;
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
 }
 
 .dashboard {
@@ -430,8 +424,8 @@ blockquote {
   align-items: center;
 }
 .dashboard .title-section__title {
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 64px;
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
 }
 
 .access-dashboard {

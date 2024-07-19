@@ -3,20 +3,23 @@
   flex-direction: column;
   width: 50%;
   gap: 2em;
+  font-family: $font-secondary-regular;
+  color: $color-text;
+  font-size: $font-size-text;
+
   .form-field {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
     label {
-      font-family: $font-primary;
-      font-size: 16px;
+      font-size: $font-size-subtitle;
+      color: $color-white;
     }
     input {
       padding: 1em;
-      color: $color-background;
       height: 2em;
-      border-radius: 5px;
-      background-color: $color-field;
+      border-radius: $border-radius;
+      border: 1px solid $color-stroke;
     }
   }
 }
