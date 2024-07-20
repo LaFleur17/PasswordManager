@@ -10,6 +10,7 @@ import {
 import Searchbar from "./Searchbar";
 import Addform from "./Addform";
 import Copypassword from "./Copypassword";
+import Deletepassword from "./Deletepassword";
 
 const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +30,7 @@ const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
     {
       accessorKey: "service",
       header: "Service",
-      cell: ({ row }) => <p className="service-cell">{row.original.service}</p>,
+      cell: (props) => <p className="service-cell">{props.getValue()}</p>,
     },
     {
       accessorKey: "username",
@@ -79,9 +80,17 @@ const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
     },
     {
       accessorKey: "_id",
-      header: "Tools",
+      header: "",
       cell: ({ row }) => (
-        <Copypassword passwordId={row.original._id} authHeader={authHeader} />
+        <div className="tools-cell">
+          <Copypassword passwordId={row.original._id} authHeader={authHeader} />
+          <Deletepassword
+            passwordId={row.original._id}
+            authHeader={authHeader}
+            data={data}
+            setData={setData}
+          />
+        </div>
       ),
     },
   ];
@@ -117,7 +126,7 @@ const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
           setColumnFilters={setColumnFilters}
         />
         <button className="cta-button" onClick={toggleAddForm}>
-          {showAddForm ? "Hide Add Form" : "Add a password"}
+          {showAddForm ? "Close" : "Create"}
         </button>
       </div>
       {showAddForm && (

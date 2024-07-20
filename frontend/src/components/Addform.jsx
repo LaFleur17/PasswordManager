@@ -7,6 +7,7 @@ const Addform = ({ authHeader, data, setData }) => {
     tags: [],
     username: "",
     password: "",
+    confirmPassword: "",
     url: "",
     notes: "",
     sharedWith: [],
@@ -47,6 +48,10 @@ const Addform = ({ authHeader, data, setData }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (newPassword.password !== newPassword.confirmPassword) {
+      alert("Les mots de passe ne correspondent pas.");
+      return;
+    }
     try {
       const response = await createPassword(newPassword, authHeader);
       console.log("Password created:", response);
@@ -61,24 +66,40 @@ const Addform = ({ authHeader, data, setData }) => {
   };
 
   return (
-    <div className="passwords-creator">
+    <div className="add-form">
       <form onSubmit={handleSubmit} className="form-fields">
         <div className="form-field">
-          <label htmlFor="siteName">Site Name*</label>
+          <label htmlFor="service">Service*</label>
           <input
-            name="siteName"
-            value={newPassword.siteName}
+            name="service"
+            value={newPassword.service}
             onChange={handleChange}
+            required
           />
         </div>
-        {/* <div className="form-field">
-          <label htmlFor="customName">Custom Name</label>
+        <div className="form-field">
+          <label htmlFor="username">Username*</label>
           <input
-            name="customName"
-            value={newPassword.customName}
+            name="username"
+            value={newPassword.username}
             onChange={handleChange}
+            required
           />
-        </div> */}
+        </div>
+        <div className="form-field">
+          <label htmlFor="password">Password*</label>
+          <input
+            name="password"
+            value={newPassword.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-field">
+          <label htmlFor="confirmPassword">Confirm Password*</label>
+          <input name="confirmPassword" onChange={handleChange} required />
+        </div>
+
         <div className="form-field">
           <label htmlFor="tags">Tags</label>
           <input
@@ -97,22 +118,6 @@ const Addform = ({ authHeader, data, setData }) => {
               </span>
             ))}
           </div>
-        </div>
-        <div className="form-field">
-          <label htmlFor="username">Username*</label>
-          <input
-            name="username"
-            value={newPassword.username}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="password">Password*</label>
-          <input
-            name="password"
-            value={newPassword.password}
-            onChange={handleChange}
-          />
         </div>
         <div className="form-field">
           <label htmlFor="url">URL</label>

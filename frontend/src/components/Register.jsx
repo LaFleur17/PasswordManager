@@ -28,25 +28,25 @@ const Register = () => {
     }
     try {
       await register(username, email, password);
-      navigate("/");
+      setError(
+        "Your account has been created successfully. You can now login."
+      );
     } catch (error) {
       if (error.response) {
         console.error("Erreur de réponse du serveur :", error.response.data);
-        setError(`Erreur d'inscription : ${error.response.data.message}`);
+        setError(`Error : ${error.response.data.message}`);
       } else if (error.request) {
         console.error(
           "La requête a été faite mais aucune réponse n'a été reçue",
           error.request
         );
-        setError("Erreur d'inscription : Le serveur ne répond pas.");
+        setError("Error : Server did not respond.");
       } else {
         console.error(
           "Erreur lors de la configuration de la requête :",
           error.message
         );
-        setError(
-          "Erreur d'inscription : Problème lors de l'envoi de la requête."
-        );
+        setError("Error : Something went wrong.");
       }
     }
   };

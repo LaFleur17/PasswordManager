@@ -7,8 +7,8 @@ const passwordCollaborationRoutes = require("./routes/passwordCollaboration");
 const libraryRoutes = require("./routes/library");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const rateLimit = require('express-rate-limit');
-const limiter = require('./utils/expressratelimit');
+const rateLimit = require("express-rate-limit");
+const limiter = require("./utils/expressratelimit");
 
 dotenv.config();
 
@@ -20,12 +20,11 @@ const IP2 = process.env.IP2;
 
 const corsOptions = {
   origin: IP2 || `${IP1}:${PORTFRONTEND}`,
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "DELETE", "PUT"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 connectDB();
-
 
 app.use(cors(corsOptions));
 

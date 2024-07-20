@@ -1,0 +1,26 @@
+.add-form {
+  display: flex;
+  width: 100%;
+  border-radius: $border-radius;
+  border: 1px solid $color-stroke;
+  padding: 1.5em;
+  .form-fields {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    .form-field {
+      width: 23%;
+      input {
+        width: 100%;
+      }
+    }
+
+    .cta-button {
+      margin-left: auto;
+    }
+  }
+}

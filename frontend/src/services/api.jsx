@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://192.168.1.32:3000", // EDIT FAST
+  baseURL: "http://localhost:3000", // EDIT FAST
 });
 
 // POST
@@ -21,6 +21,10 @@ export const copyPassword = (passwordId, token) =>
       headers: { Authorization: `${token}` },
     }
   );
+export const deletePassword = (passwordId, token) =>
+  api.delete(`/password/${passwordId}`, {
+    headers: { Authorization: `${token}` },
+  });
 
 // GET
 export const getPasswords = (token) =>
