@@ -17,7 +17,7 @@ console.log(generateStrongPassword()); // Exemple d'utilisation pour générer u
 // Création d'une fiche de mots de passe
 exports.createPassword = async (req, res) => {
   try {
-    const { siteName, tags, username, password, url, comments } = req.body;
+    const { service, tags, username, password, url, comments } = req.body;
 
     // Chiffrement du mot de passe avant de l'enregistrer
     const cipher = crypto.createCipher('aes-256-cbc', process.env.ENCRYPTION_KEY);
@@ -26,7 +26,7 @@ exports.createPassword = async (req, res) => {
 
     const newPassword = new Password({
       userId: req.user.id,
-      siteName,
+      service,
       tags,
       username,
       password: encryptedPassword,

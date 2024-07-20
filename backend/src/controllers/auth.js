@@ -1,22 +1,29 @@
-const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const { validatePassword } = require("../utils/passwordValidator");
 
 const register = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   try {
-    // Vérifiez si l'utilisateur existe déjà
+    // Vérifier la complexité du mot de passe
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      return res.status(400).json({ message: passwordError });
+    }
+
+    // Vérifier si l'utilisateur existe déjà
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ message: "Username or email invalid" });
+      return res.status(400).json({ message: "Username or email already exists" });
     }
+
+    // Hacher le mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("Hashed Password:", hashedPassword);
-    // Créez un nouvel utilisateur avec le mot de passe hashé
-    const newUser = new User({ username, email, password });
+
+    // Créer un nouvel utilisateur avec le mot de passe haché
+    const newUser = new User({ username, email, password});
     await newUser.save();
 
     res.json({ message: "Registration successful" });
@@ -24,7 +31,6 @@ const register = async (req, res, next) => {
     next(error);
   }
 };
-
 const login = async (req, res, next) => {
   const { username, password } = req.body;
 

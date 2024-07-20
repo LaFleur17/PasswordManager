@@ -7,6 +7,8 @@ const passwordCollaborationRoutes = require("./routes/passwordCollaboration");
 const libraryRoutes = require("./routes/library");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const rateLimit = require('express-rate-limit');
+const limiter = require('./utils/expressratelimit');
 
 dotenv.config();
 
@@ -24,9 +26,12 @@ const corsOptions = {
 
 connectDB();
 
+
 app.use(cors(corsOptions));
 
 app.use(express.json());
+
+app.use(limiter);
 
 app.use("/auth", authRoutes);
 
