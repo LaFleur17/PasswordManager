@@ -9,7 +9,7 @@ const passwordSchema = new mongoose.Schema(
       ref: 'User',
       required: true
     },
-    siteName: {
+    service: {
       type: String,
       required: true,
       trim: true,
@@ -31,15 +31,15 @@ const passwordSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: 5,
-      maxlength: 20,
+      minlength: 3,
+      maxlength: 30,
     },
     password: {
       type: String,
       required: true,
       trim: true,
       minlength: 8,
-      maxlength: 100,
+      maxlength: 500,
     },
     url: {
       type: String,
