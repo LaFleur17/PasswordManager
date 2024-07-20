@@ -267,6 +267,22 @@ blockquote {
   color: #fafffe;
 }
 
+.copy-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+.copy-button .copy-icon {
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+.copy-button:hover .copy-icon {
+  opacity: 1;
+}
+
 .password-manager {
   width: 80%;
   flex-direction: column;
@@ -325,11 +341,20 @@ blockquote {
   align-items: center;
   flex: 1;
 }
-.password-manager .table .table-row .table-cell .sitename-cell {
+.password-manager .table .table-row .table-cell .tags-cell {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 4px;
+}
+.password-manager .table .table-row .table-cell .tags-cell .tag {
+  display: flex;
   justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  background-color: rgba(250, 255, 254, 0.25);
+  font-size: 10px;
+  color: #fafffe;
+  border-radius: 5px;
+  padding: 2px 6px;
 }
 .password-manager .passwords-filters {
   display: flex;

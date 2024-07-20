@@ -3,21 +3,45 @@ import { createPassword } from "../services/api";
 
 const Addform = ({ authHeader, data, setData }) => {
   const initialState = {
-    siteName: "",
-    customName: "",
+    service: "",
+    tags: [],
     username: "",
     password: "",
     url: "",
-    comments: "",
+    notes: "",
+    sharedWith: [],
   };
 
   const [newPassword, setNewPassword] = useState(initialState);
+  const [tagInput, setTagInput] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNewPassword((prevState) => ({
       ...prevState,
       [name]: value,
+    }));
+  };
+
+  const handleTagInputChange = (event) => {
+    setTagInput(event.target.value);
+  };
+
+  const handleTagInputKeyDown = (event) => {
+    if (event.key === "Enter" && tagInput) {
+      event.preventDefault();
+      setNewPassword((prevState) => ({
+        ...prevState,
+        tags: [...prevState.tags, tagInput.trim()],
+      }));
+      setTagInput("");
+    }
+  };
+
+  const removeTag = (indexToRemove) => {
+    setNewPassword((prevState) => ({
+      ...prevState,
+      tags: prevState.tags.filter((_, index) => index !== indexToRemove),
     }));
   };
 
@@ -47,13 +71,32 @@ const Addform = ({ authHeader, data, setData }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-field">
+        {/* <div className="form-field">
           <label htmlFor="customName">Custom Name</label>
           <input
             name="customName"
             value={newPassword.customName}
             onChange={handleChange}
           />
+        </div> */}
+        <div className="form-field">
+          <label htmlFor="tags">Tags</label>
+          <input
+            name="tags"
+            value={tagInput}
+            onChange={handleTagInputChange}
+            onKeyDown={handleTagInputKeyDown}
+          />
+          <div className="tags-container">
+            {newPassword.tags.map((tag, index) => (
+              <span key={index} className="tag">
+                {tag}
+                <button type="button" onClick={() => removeTag(index)}>
+                  x
+                </button>
+              </span>
+            ))}
+          </div>
         </div>
         <div className="form-field">
           <label htmlFor="username">Username*</label>

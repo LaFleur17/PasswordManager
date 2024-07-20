@@ -16,3 +16,19 @@
   border: 1px solid rgba($color-primary, 0.25);
   color: $color-white;
 }
+
+.copy-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  .copy-icon {
+    opacity: 0.5;
+    transition: all 0.3s ease-in-out;
+  }
+  &:hover .copy-icon {
+    opacity: 1;
+  }
+}

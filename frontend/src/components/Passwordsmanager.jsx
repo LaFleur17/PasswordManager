@@ -9,48 +9,7 @@ import {
 } from "@tanstack/react-table";
 import Searchbar from "./Searchbar";
 import Addform from "./Addform";
-
-const columns = [
-  {
-    accessorKey: "siteName",
-    header: "Site Name",
-    cell: ({ row }) => (
-      <div className="sitename-cell">
-        <h4>{row.original.siteName.toUpperCase()}</h4>
-        <p>{row.original.customName}</p>
-      </div>
-    ),
-  },
-  {
-    accessorKey: "username",
-    header: "Username",
-    cell: (props) => <p>{props.getValue()}</p>,
-  },
-  {
-    accessorKey: "url",
-    header: "URL",
-    cell: (props) => <p>{props.getValue()?.replace(/https?:\/\//, "")}</p>,
-  },
-  {
-    accessorKey: "updatedAt",
-    header: "Latest update",
-    cell: (props) => {
-      const date = new Date(props.getValue());
-      const formattedDate = date
-        .toLocaleString("eng-GB", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-        })
-        .replace(/\//g, "-")
-        .replace(",", " -");
-      return <p>{formattedDate}</p>;
-    },
-  },
-];
+import Copypassword from "./Copypassword";
 
 const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,6 +24,67 @@ const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
   useEffect(() => {
     showPasswords();
   }, [authHeader.authToken]);
+
+  const columns = [
+    {
+      accessorKey: "service",
+      header: "Service",
+      cell: ({ row }) => <p className="service-cell">{row.original.service}</p>,
+    },
+    {
+      accessorKey: "username",
+      header: "Username",
+      cell: (props) => <p className="username-cell">{props.getValue()}</p>,
+    },
+    {
+      accessorKey: "url",
+      header: "URL",
+      cell: (props) => (
+        <p className="url-cell">
+          {props.getValue()?.replace(/https?:\/\//, "")}
+        </p>
+      ),
+    },
+    {
+      accessorKey: "updatedAt",
+      header: "Latest update",
+      cell: (props) => {
+        const date = new Date(props.getValue());
+        const formattedDate = date
+          .toLocaleString("eng-GB", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          })
+          .replace(/\//g, "-")
+          .replace(",", " -");
+        return <p className="updatedat-cell">{formattedDate}</p>;
+      },
+    },
+    {
+      accessorKey: "tags",
+      header: "Tags",
+      cell: ({ row }) => (
+        <ul className="tags-cell">
+          {row.original.tags.map((tag, index) => (
+            <li key={index} className="tag">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      ),
+    },
+    {
+      accessorKey: "_id",
+      header: "Tools",
+      cell: ({ row }) => (
+        <Copypassword passwordId={row.original._id} authHeader={authHeader} />
+      ),
+    },
+  ];
 
   const table = useReactTable({
     columns,
@@ -107,11 +127,7 @@ const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
         {table.getHeaderGroups().map((headerGroup) => (
           <div className="table-row" key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <div
-                className="table-header"
-                w={header.getSize()}
-                key={header.id}
-              >
+              <div className="table-header" key={header.id}>
                 {header.column.columnDef.header}
               </div>
             ))}
@@ -120,11 +136,7 @@ const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
         {table.getRowModel().rows.map((row) => (
           <div className="table-row" key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <div
-                className="table-cell"
-                w={cell.column.getSize()}
-                key={cell.id}
-              >
+              <div className="table-cell" key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </div>
             ))}

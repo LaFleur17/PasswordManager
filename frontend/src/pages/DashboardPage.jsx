@@ -13,10 +13,9 @@ const DashboardPage = () => {
       const passwords = await getPasswords(authHeader);
       setData(passwords.data);
     } catch (error) {
-      console.error("GetPasswords failed:", error);
+      console.error("showPasswords failed:", error);
     }
   };
-
   return (
     <div className="dashboard">
       <Navigation />
