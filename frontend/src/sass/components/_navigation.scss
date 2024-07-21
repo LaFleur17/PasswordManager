@@ -1,0 +1,24 @@
+.nav {
+  align-self: flex-end;
+  padding-right: 1em;
+  &__links {
+    display: flex;
+    gap: 1em;
+    flex-direction: row;
+  }
+  &__link {
+    line-height: 2em;
+    font-family: $font-secondary-regular;
+    color: $color-text;
+    transition: all 0.28s ease-in-out;
+    &:hover {
+      color: $color-white;
+    }
+  }
+
+  &__active-link {
+    line-height: 2em;
+    font-family: $font-secondary-medium;
+    color: $color-white;
+  }
+}

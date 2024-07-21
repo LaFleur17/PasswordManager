@@ -1,0 +1,33 @@
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 2em;
+  font-family: $font-secondary-regular;
+  color: $color-text;
+  font-size: $font-size-text;
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    label {
+      font-size: $font-size-subtitle;
+      color: $color-white;
+    }
+    input {
+      padding: 1em;
+      height: 2em;
+      border-radius: $border-radius;
+      border: 1px solid $color-stroke;
+    }
+  }
+}
+
+.button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}

@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true,
-      minlength: 5,
+      minlength: 3,
       maxlength: 20,
     },
     email: {
@@ -57,6 +57,7 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
 
 // Middleware pour hasher le mot de passe avant de sauvegarder dans la base de données
 userSchema.pre("save", async function (next) {

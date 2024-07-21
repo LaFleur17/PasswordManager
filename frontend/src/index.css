@@ -1,0 +1,529 @@
+/* reset.scss */
+/* Box-sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+dl,
+dd,
+ol,
+ul,
+figure,
+hr {
+  margin: 0;
+}
+
+/* Remove default padding */
+ul,
+ol {
+  padding: 0;
+}
+
+/* Remove list style */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default font size and weight on headings and set a consistent font family */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+/* Remove quotes from blockquote and q */
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: "";
+  content: none;
+}
+
+/* Set a consistent background color and text color */
+body {
+  background: #141f1c;
+  color: #9aada9;
+  font-family: sans-serif;
+}
+
+/* Remove default border on elements */
+fieldset,
+img {
+  border: 0;
+}
+
+/* Set consistent border box behavior */
+html {
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar; /* for Internet Explorer */
+}
+
+/* Inherit line-height to improve consistency */
+* {
+  line-height: inherit;
+}
+
+/* Remove default fieldset and legend styles */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default button and input styles */
+button,
+input,
+select,
+textarea {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+/* Remove default appearance on form elements */
+button,
+input,
+select,
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Remove default link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Remove default table border and padding */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption {
+  text-align: left;
+  font-size: 1em;
+  padding: 0.5em 0;
+}
+
+/* Set default image behavior */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Reset hr element */
+hr {
+  border: none;
+  height: 1px;
+  background: #000;
+  margin: 0;
+}
+
+/* Remove default quotes for blockquote and q elements */
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default focus outline */
+:focus {
+  outline: none;
+}
+
+@font-face {
+  font-family: "Geist-Medium";
+  src: url("./assets/fonts/Geist-1.3.0/Geist-1.3.0/statics-woff/Geist-Medium.woff") format("woff"), url("./assets/fonts/Geist-1.3.0/Geist-1.3.0/statics-woff/Geist-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Geist-Regular";
+  src: url("./assets/fonts/Geist-1.3.0/Geist-1.3.0/statics-woff/Geist-Regular.woff") format("woff"), url("./assets/fonts/Geist-1.3.0/Geist-1.3.0/statics-woff/Geist-Regular.woff2") format("woff2");
+}
+.nav {
+  align-self: flex-end;
+  padding-right: 1em;
+}
+.nav__links {
+  display: flex;
+  gap: 1em;
+  flex-direction: row;
+}
+.nav__link {
+  line-height: 2em;
+  font-family: "Geist-Regular", sans-serif;
+  color: #9aada9;
+  transition: all 0.28s ease-in-out;
+}
+.nav__link:hover {
+  color: #fafffe;
+}
+.nav__active-link {
+  line-height: 2em;
+  font-family: "Geist-Medium", sans-serif;
+  color: #fafffe;
+}
+
+.login {
+  background-color: #141f1c;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 50%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.register {
+  background-color: #141f1c;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 50%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 2em;
+  font-family: "Geist-Regular", sans-serif;
+  color: #9aada9;
+  font-size: 12px;
+}
+.form-fields .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.form-fields .form-field label {
+  font-size: 16px;
+  color: #fafffe;
+}
+.form-fields .form-field input {
+  padding: 1em;
+  height: 2em;
+  border-radius: 5px;
+  border: 1px solid #293d38;
+}
+
+.button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-button {
+  background-color: rgba(0, 204, 149, 0.35);
+  border: 1px solid rgba(0, 204, 149, 0.5);
+  color: #fafffe;
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  transition: 0.4s;
+  border-radius: 5px;
+  padding: 0.5em 2em;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: rgba(0, 204, 149, 0.15);
+  border: 1px solid rgba(0, 204, 149, 0.25);
+  color: #fafffe;
+}
+
+.copy-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+.copy-button .copy-icon {
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+.copy-button:hover .copy-icon {
+  opacity: 1;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+.delete-button .delete-icon {
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+.delete-button:hover .delete-icon {
+  opacity: 1;
+}
+
+.password-manager {
+  width: 80%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3em;
+  background-color: #141f1c;
+}
+.password-manager .table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+.password-manager .table .table-row {
+  display: flex;
+  flex-direction: row;
+  height: 48px;
+  border: 1px solid #293d38;
+}
+.password-manager .table .table-row:first-child {
+  height: 40px;
+  border: none;
+}
+.password-manager .table .table-row:first-child .table-header {
+  padding-left: 1.5rem;
+  color: #fafffe;
+  position: relative;
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+}
+.password-manager .table .table-row:first-child .table-header:last-child {
+  flex: 0.5;
+}
+.password-manager .table .table-row:nth-child(2) {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.password-manager .table .table-row .tools-cell {
+  opacity: 0;
+  display: flex;
+  flex-direction: row;
+}
+.password-manager .table .table-row:hover .tools-cell {
+  transition: all 0.4s ease-in-out;
+  opacity: 1;
+}
+.password-manager .table .table-row .table-cell {
+  padding-left: 1.5rem;
+  color: #9aada9;
+  font-family: "Geist-Regular", sans-serif;
+  font-size: 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+}
+.password-manager .table .table-row .table-cell .tags-cell {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+.password-manager .table .table-row .table-cell .tags-cell .tag {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: rgba(250, 255, 254, 0.25);
+  font-size: 10px;
+  color: #fafffe;
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+.password-manager .table .table-row .table-cell:last-child {
+  flex: 0.5;
+}
+
+.search-add-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 10%;
+}
+.search-add-section .search-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 640px;
+  border-radius: 5px;
+  border: 1px solid #293d38;
+}
+.search-add-section .search-bar .search-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #293d38;
+  width: 77%;
+  padding: 1em;
+  height: 44px;
+}
+.search-add-section .search-bar .search-section .search-icon {
+  width: 24px;
+  height: auto;
+}
+.search-add-section .search-bar .search-by-dropdown {
+  display: flex;
+  align-content: center;
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
+  color: #fafffe;
+  border-radius: 5px;
+  border: 1px solid #293d38;
+  width: 23%;
+  height: 44px;
+  position: relative;
+}
+.search-add-section .search-bar .search-by-dropdown .dropdown {
+  padding-left: 1em;
+  width: 100%;
+  z-index: 1;
+}
+.search-add-section .search-bar .search-by-dropdown .dropdown option {
+  background-color: #141f1c;
+  color: #9aada9;
+  font-family: "Geist-Regular", sans-serif;
+  font-size: 16px;
+}
+.search-add-section .search-bar .search-by-dropdown .dropdown-icon {
+  z-index: 0;
+  position: absolute;
+  right: 0;
+  top: 25%;
+  width: 24px;
+  height: auto;
+}
+
+.add-form {
+  display: flex;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #293d38;
+  padding: 1.5em;
+}
+.add-form .form-fields {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5em;
+}
+.add-form .form-fields .form-field {
+  width: 23%;
+}
+.add-form .form-fields .form-field input {
+  width: 100%;
+}
+.add-form .form-fields .cta-button {
+  margin-left: auto;
+}
+
+.home-page {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background-color: none;
+  display: flex;
+  flex-direction: column;
+}
+.home-page .hero {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home-page .hero__title {
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
+}
+
+.dashboard {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 120px;
+}
+.dashboard .title-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboard .title-section__title {
+  font-family: "Geist-Medium", sans-serif;
+  font-size: 16px;
+}
+
+.access-dashboard {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -13,23 +13,23 @@ const generateStrongPassword = () => {
   return password;
 };
 
-console.log(generateStrongPassword()); // Exemple d'utilisation pour générer un mot de passe
 // Création d'une fiche de mots de passe
 exports.createPassword = async (req, res) => {
   try {
-    const { siteName, customName, username, password, url, comments } = req.body;
+    const { service, tags, username, password, url, comments } = req.body;
 
-    // Chiffrement du mot de passe avant de l'enregistrer
-    const cipher = crypto.createCipher('aes-256-cbc', process.env.ENCRYPTION_KEY);
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(process.env.ENCRYPTION_KEY, 'hex'), iv);
     let encryptedPassword = cipher.update(password, 'utf8', 'hex');
     encryptedPassword += cipher.final('hex');
 
     const newPassword = new Password({
       userId: req.user.id,
-      siteName,
-      customName,
+      service,
+      tags,
       username,
       password: encryptedPassword,
+      iv: iv.toString('hex'),
       url,
       comments
     });
@@ -40,6 +40,7 @@ exports.createPassword = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 // Lecture des fiches de mots de passe
 exports.getPasswords = async (req, res) => {
@@ -62,14 +63,15 @@ exports.updatePassword = async (req, res) => {
       return res.status(403).json({ message: 'Forbidden' });
     }
 
-    // Mettre à jour les champs nécessaires
     Object.assign(password, req.body);
 
     if (req.body.password) {
-      const cipher = crypto.createCipher('aes-256-cbc', process.env.ENCRYPTION_KEY);
+      const iv = crypto.randomBytes(16);
+      const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(process.env.ENCRYPTION_KEY, 'hex'), iv);
       let encryptedPassword = cipher.update(req.body.password, 'utf8', 'hex');
       encryptedPassword += cipher.final('hex');
       password.password = encryptedPassword;
+      password.iv = iv.toString('hex');
     }
 
     await password.save();
@@ -96,19 +98,22 @@ exports.deletePassword = async (req, res) => {
   }
 };
 
-// Copier le mot de passe dans le presse-papiers
-exports.copyPasswordToClipboard = async (req, res) => {
+// Route pour obtenir un mot de passe spécifique
+exports.getPassword = async (req, res) => {
   try {
     const password = await Password.findById(req.params.id);
+
     if (!password) {
       return res.status(404).json({ message: 'Password not found' });
     }
+
     if (password.userId.toString() !== req.user.id) {
       return res.status(403).json({ message: 'Forbidden' });
     }
+
     const decryptedPassword = password.decryptPassword();
-    clipboardy.writeSync(decryptedPassword);
-    res.status(200).json({ message: 'Password copied to clipboard' });
+
+    res.status(200).json({ password: decryptedPassword });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -123,4 +128,5 @@ exports.generateStrongPassword = (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 

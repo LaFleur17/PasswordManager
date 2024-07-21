@@ -1,5 +1,3 @@
-// controllers/passwordCollaborationController.js
-
 const Password = require('../models/Password');
 const User = require('../models/User');
 

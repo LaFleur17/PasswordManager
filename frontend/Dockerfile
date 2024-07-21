@@ -1,24 +1,29 @@
-# Utiliser une image Node.js pour le build du frontend
-FROM node:14 as build
+# Utilisez une image de base officielle de Node.js pour builder l'application frontend
+FROM node:20 AS build
 
-# Définir le répertoire de travail pour le build
+# Définir le répertoire de travail dans le conteneur
 WORKDIR /app/frontend
 
-# Copier les fichiers nécessaires
-COPY package.json package-lock.json /app/frontend
+# Copier les fichiers package.json et package-lock.json (ou yarn.lock) dans le répertoire de travail
+COPY package.json package-lock.json ./
 
-# Installer les dépendances
-RUN npm install 
+# Installer les dépendances du frontend
+RUN npm install
 
 # Copier le reste des fichiers de l'application frontend
-COPY . /app/frontend
+COPY . .
 
-# Build de l'application React
-#RUN npm run build
+# Construire l'application frontend pour la production
+RUN npm run build
 
-# Exposer le port HTTP par défaut de Nginx
-#EXPOSE 3000
+# Utiliser une image de base pour servir les fichiers statiques
+FROM nginx:alpine
 
-# Commande par défaut pour démarrer Nginx
-#CMD ["npm", "start"]
+# Copier les fichiers construits dans le répertoire par défaut de Nginx
+COPY --from=build /app/frontend/dist /usr/share/nginx/html
 
+# Exposer le port sur lequel Nginx écoute
+EXPOSE 80
+
+# Démarrer Nginx
+CMD ["nginx", "-g", "daemon off;"]
