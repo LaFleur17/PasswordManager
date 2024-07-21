@@ -98,8 +98,8 @@ exports.deletePassword = async (req, res) => {
   }
 };
 
-// Copier le mot de passe dans le presse-papiers
-exports.copyPasswordToClipboard = async (req, res) => {
+// Route pour obtenir un mot de passe spécifique
+exports.getPassword = async (req, res) => {
   try {
     const password = await Password.findById(req.params.id);
 
@@ -112,12 +112,8 @@ exports.copyPasswordToClipboard = async (req, res) => {
     }
 
     const decryptedPassword = password.decryptPassword();
-    clipboardy.writeSync(decryptedPassword);
 
-    password.lastCopied = new Date();
-    await password.save();
-
-    res.status(200).json({ message: 'Password copied to clipboard' });
+    res.status(200).json({ password: decryptedPassword });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

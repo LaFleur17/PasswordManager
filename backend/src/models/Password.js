@@ -61,12 +61,6 @@ const passwordSchema = new mongoose.Schema(
       type: String,
       trim: true,
       maxlength: 200,
-      validate: {
-        validator: function (value) {
-          return /^(http|https):\/\/[^ "]+$/.test(value);
-        },
-        message: 'URL non valide'
-      }
     },
     sharedWith: [{
       type: mongoose.Schema.Types.ObjectId,
