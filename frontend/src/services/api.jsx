@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://192.168.1.32:3000", // EDIT FAST
+  baseURL: `http://${process.env.IP}:${process.env.PORT}`,
 });
 
 // POST
