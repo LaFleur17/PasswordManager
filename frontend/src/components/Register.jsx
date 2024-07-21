@@ -13,19 +13,25 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@.$!%*?&]{12,}$/;
 
     if (password !== confirmPassword) {
       setError("Les mots de passe ne correspondent pas.");
       return;
     }
 
-    if (!passwordRegex.test(password)) {
+    if(
+      password.length < 12 ||
+      !/[0-9]/.test(password) ||
+      !/[A-Z]/.test(password) ||
+      !/[a-z]/.test(password) ||
+      !/[@$!%*?&./\\#-_+='"`()[\]]/.test(password)
+    ) {
       setError(
         "Le mot de passe doit contenir au moins 12 caractères, dont une majuscule, une minuscule, un chiffre et un caractère spécial."
       );
-      return;
     }
+
     try {
       await register(username, email, password);
       setError(
