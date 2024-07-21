@@ -19,7 +19,7 @@ const IP1 = process.env.IP1;
 const IP2 = process.env.IP2;
 
 const corsOptions = {
-  origin: IP2 || `${IP1}:${PORTFRONTEND}`,
+  origin: IP2 || `${IP1}`,
   methods: ["GET", "POST", "DELETE", "PUT"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
