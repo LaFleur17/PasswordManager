@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const IP = import.meta.env.VITE_IP;
+const PORT = import.meta.env.VITE_PORT;
+
 const api = axios.create({
-  baseURL: `http://${process.env.IP}:${process.env.PORT}`,
+  baseURL: `http://${IP}:${PORT}`,
 });
 
 // POST

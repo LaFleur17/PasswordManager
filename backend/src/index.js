@@ -16,7 +16,7 @@ const PORT = process.env.PORT;
 const IP = process.env.IP;
 
 const corsOptions = {
-  origin: IP,
+  origin: `http://${IP}`,
   methods: ["GET", "POST", "DELETE", "PUT"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
