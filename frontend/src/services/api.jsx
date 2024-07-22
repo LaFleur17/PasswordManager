@@ -33,4 +33,10 @@ export const deletePassword = (passwordId, token) =>
 export const getPasswords = (token) =>
   api.get("/password", { headers: { Authorization: `${token}` } });
 
+// PUT
+export const updatePassword = (passwordId, updatedPassword, token) =>
+  api.put(`/password/${passwordId}`, updatedPassword, {
+    headers: { Authorization: `${token}` },
+  });
+
 export default api;

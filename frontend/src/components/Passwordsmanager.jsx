@@ -11,16 +11,24 @@ import Searchbar from "./Searchbar";
 import Addform from "./Addform";
 import Copypassword from "./Copypassword";
 import Deletepassword from "./Deletepassword";
+import Passwordcard from "./Passwordcard";
 
 const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [columnFilters, setColumnFilters] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
   const [showAddForm, setShowAddForm] = useState(false);
+  const [isPasswordcardOpen, setIsPasswordcardOpen] = useState(false);
+  const [selectedRowData, setSelectedRowData] = useState(null);
+  const [selectedRowId, setSelectedRowId] = useState(null);
 
   const toggleAddForm = () => setShowAddForm(!showAddForm);
 
-  const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const handleRowClick = (rowData) => {
+    setSelectedRowData(rowData);
+    setIsPasswordcardOpen(true);
+    setSelectedRowId(rowData._id);
+  };
 
   useEffect(() => {
     showPasswords();
@@ -132,6 +140,14 @@ const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
       {showAddForm && (
         <Addform authHeader={authHeader} data={data} setData={setData} />
       )}
+      {isPasswordcardOpen && (
+        <Passwordcard
+          data={selectedRowData}
+          onClose={() => setIsPasswordcardOpen(false)}
+          setData={setData}
+          authHeader={authHeader}
+        />
+      )}
       <div className="table">
         {table.getHeaderGroups().map((headerGroup) => (
           <div className="table-row" key={headerGroup.id}>
@@ -143,7 +159,13 @@ const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
           </div>
         ))}
         {table.getRowModel().rows.map((row) => (
-          <div className="table-row" key={row.id}>
+          <div
+            className={`table-row ${
+              row.original._id === selectedRowId ? "selected" : ""
+            }`}
+            key={row.id}
+            onClick={() => handleRowClick(row.original)}
+          >
             {row.getVisibleCells().map((cell) => (
               <div className="table-cell" key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -152,6 +174,7 @@ const Passwordmanager = ({ data, setData, authHeader, showPasswords }) => {
           </div>
         ))}
       </div>
+
       <p>
         Page {table.getState().pagination.pageIndex + 1} of {""}
         {table.getPageCount()}

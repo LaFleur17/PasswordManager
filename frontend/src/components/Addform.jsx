@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createPassword } from "../services/api";
+import Iconremove from "../assets/icons/remove.svg";
 
 const Addform = ({ authHeader, data, setData }) => {
   const initialState = {
@@ -9,7 +10,7 @@ const Addform = ({ authHeader, data, setData }) => {
     password: "",
     confirmPassword: "",
     url: "",
-    notes: "",
+    comments: "",
     sharedWith: [],
   };
 
@@ -49,19 +50,17 @@ const Addform = ({ authHeader, data, setData }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (newPassword.password !== newPassword.confirmPassword) {
-      alert("Les mots de passe ne correspondent pas.");
+      alert("Passwords do not match.");
       return;
     }
     try {
-      const response = await createPassword(newPassword, authHeader);
+      const { confirmPassword, ...dataToSend } = newPassword;
+      const response = await createPassword(dataToSend, authHeader);
       console.log("Password created:", response);
       setData((data) => [...data, response.data]);
       setNewPassword(initialState);
     } catch (error) {
-      console.error(
-        "Erreur lors de l'envoi de la requête createPassword:",
-        error
-      );
+      console.error("Error while sending the createPassword request:", error);
     }
   };
 
@@ -90,6 +89,7 @@ const Addform = ({ authHeader, data, setData }) => {
           <label htmlFor="password">Password*</label>
           <input
             name="password"
+            type="password"
             value={newPassword.password}
             onChange={handleChange}
             required
@@ -97,7 +97,13 @@ const Addform = ({ authHeader, data, setData }) => {
         </div>
         <div className="form-field">
           <label htmlFor="confirmPassword">Confirm Password*</label>
-          <input name="confirmPassword" onChange={handleChange} required />
+          <input
+            name="confirmPassword"
+            value={newPassword.confirmPassword}
+            onChange={handleChange}
+            type="password"
+            required
+          />
         </div>
 
         <div className="form-field">
@@ -107,14 +113,18 @@ const Addform = ({ authHeader, data, setData }) => {
             value={tagInput}
             onChange={handleTagInputChange}
             onKeyDown={handleTagInputKeyDown}
+            placeholder="Press Enter to add a tag"
           />
           <div className="tags-container">
             {newPassword.tags.map((tag, index) => (
               <span key={index} className="tag">
                 {tag}
-                <button type="button" onClick={() => removeTag(index)}>
-                  x
-                </button>
+                <img
+                  src={Iconremove}
+                  className="remove-button"
+                  type="button"
+                  onClick={() => removeTag(index)}
+                />
               </span>
             ))}
           </div>

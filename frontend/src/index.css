@@ -303,6 +303,16 @@ blockquote {
   opacity: 1;
 }
 
+.remove-button {
+  width: 10px;
+  height: auto;
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+}
+.remove-button:hover {
+  opacity: 1;
+}
+
 .password-manager {
   width: 80%;
   flex-direction: column;
@@ -323,10 +333,15 @@ blockquote {
   flex-direction: row;
   height: 48px;
   border: 1px solid #293d38;
+  cursor: pointer;
+}
+.password-manager .table .table-row.selected {
+  background-color: rgba(250, 255, 254, 0.1);
 }
 .password-manager .table .table-row:first-child {
   height: 40px;
   border: none;
+  cursor: default;
 }
 .password-manager .table .table-row:first-child .table-header {
   padding-left: 1.5rem;
@@ -376,7 +391,7 @@ blockquote {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background-color: rgba(250, 255, 254, 0.25);
+  background-color: rgba(250, 255, 254, 0.2);
   font-size: 10px;
   color: #fafffe;
   border-radius: 5px;
@@ -474,6 +489,25 @@ blockquote {
 }
 .add-form .form-fields .cta-button {
   margin-left: auto;
+  padding: 0.5em 1rem;
+}
+.add-form .tags-container {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+.add-form .tags-container .tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  background-color: rgba(250, 255, 254, 0.2);
+  font-size: 10px;
+  color: #fafffe;
+  border-radius: 5px;
+  padding: 2px 6px;
+  width: fit-content;
 }
 
 .home-page {

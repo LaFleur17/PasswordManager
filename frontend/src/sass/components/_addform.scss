@@ -18,9 +18,27 @@
         width: 100%;
       }
     }
-
     .cta-button {
       margin-left: auto;
+      padding: 0.5em 1rem;
+    }
+  }
+  .tags-container {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    .tag {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      background-color: rgba($color-white, 0.2);
+      font-size: $font-size-tags;
+      color: $color-white;
+      border-radius: $border-radius;
+      padding: 2px 6px;
+      width: fit-content;
     }
   }
 }

@@ -12,8 +12,8 @@ const limiter = require("./utils/expressratelimit");
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT;
 const IP = process.env.IP;
+const PORT = process.env.PORT;
 
 const corsOptions = {
   origin: `http://${IP}`,
@@ -45,7 +45,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("hello wodwrdwdewld2")
+  res.send("hello wodwrdwdewld2");
 });
 
 app.listen(PORT, () => {
